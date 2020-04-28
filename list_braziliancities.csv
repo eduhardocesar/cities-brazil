@@ -183,7 +183,7 @@ ID_IBGE,Region,UF,State,Microregion,Mesoregion,City,Latitude,Longitude
 1502004,Norte,PA,Pará,Arari,Marajó,Cachoeira do Arari,-1.0143572,-48.9621089
 1502103,Norte,PA,Pará,Cametá,Nordeste Paraense,Cametá,-2.242949,-49.497885
 1502152,Norte,PA,Pará,Parauapebas,Sudeste Paraense,Canaã dos Carajás,-6.5296837,-49.8516592
-1502202,Norte,PA,Pará,Bragantina,Nordeste Paraense,Capanema,-25.6704878,-53.8083036
+1502202,Norte,PA,Pará,Bragantina,Nordeste Paraense,Capanema,-1.193305,-47.182868
 1502301,Norte,PA,Pará,Guamá,Nordeste Paraense,Capitão Poço,-1.7447162,-47.0638495
 1502400,Norte,PA,Pará,Castanhal,Metropolitana de Belém,Castanhal,-1.2927031,-47.9223903
 1502509,Norte,PA,Pará,Arari,Marajó,Chaves,-0.164154,-49.987006
@@ -861,7 +861,7 @@ ID_IBGE,Region,UF,State,Microregion,Mesoregion,City,Latitude,Longitude
 2209955,Nordeste,PI,Piauí,Picos,Sudeste Piauiense,São João da Varjota,-6.9157923,-41.8637609
 2209971,Nordeste,PI,Piauí,Baixo Parnaíba Piauiense,Norte Piauiense,São João do Arraial,-3.8126524,-42.4508146
 2210003,Nordeste,PI,Piauí,Alto Médio Canindé,Sudeste Piauiense,São João do Piauí,-8.3601426,-42.2487642
-2210052,Nordeste,PI,Piauí,Litoral Piauiense,Norte Piauiense,São José do Divino,-18.4794444,-41.3885671
+2210052,Nordeste,PI,Piauí,Litoral Piauiense,Norte Piauiense,São José do Divino,-3.810854,-41.829755
 2210102,Nordeste,PI,Piauí,Floriano,Sudoeste Piauiense,São José do Peixe,-7.4938166,-42.5661301
 2210201,Nordeste,PI,Piauí,Picos,Sudeste Piauiense,São José do Piauí,-6.8725567,-41.4772864
 2210300,Nordeste,PI,Piauí,Pio IX,Sudeste Piauiense,São Julião,-7.0834413,-40.8362405
@@ -1610,7 +1610,7 @@ ID_IBGE,Region,UF,State,Microregion,Mesoregion,City,Latitude,Longitude
 2612554,Nordeste,PE,Pernambuco,Araripina,Sertão Pernambucano,Santa Filomena,-8.1605806,-40.613247
 2612604,Nordeste,PE,Pernambuco,Petrolina,São Francisco Pernambucano,Santa Maria da Boa Vista,-8.8001615,-39.8271099
 2612703,Nordeste,PE,Pernambuco,Alto Capibaribe,Agreste Pernambucano,Santa Maria do Cambucá,-7.8328155,-35.882795
-2612802,Nordeste,PE,Pernambuco,Pajeú,Sertão Pernambucano,Santa Terezinha,-7.37696,-37.47875
+2612802,Nordeste,PE,Pernambuco,Pajeú,Sertão Pernambucano,Santa Terezinha,-8.782388,-35.575385
 2612901,Nordeste,PE,Pernambuco,Mata Meridional Pernambucana,Mata Pernambucana,São Benedito do Sul,-8.8107294,-35.9334035
 2613008,Nordeste,PE,Pernambuco,Vale do Ipojuca,Agreste Pernambucano,São Bento do Una,-8.5207092,-36.4445546
 2613107,Nordeste,PE,Pernambuco,Vale do Ipojuca,Agreste Pernambucano,São Caitano,-8.3304491,-36.135359
@@ -2173,7 +2173,7 @@ ID_IBGE,Region,UF,State,Microregion,Mesoregion,City,Latitude,Longitude
 2928208,Nordeste,BA,Bahia,Santa Maria da Vitória,Extremo Oeste Baiano,Santana,-12.979217,-44.05064
 2928307,Nordeste,BA,Bahia,Feira de Santana,Centro Norte Baiano,Santanópolis,-12.0243828,-38.8650365
 2928406,Nordeste,BA,Bahia,Cotegipe,Extremo Oeste Baiano,Santa Rita de Cássia,-11.0013969,-44.5209684
-2928505,Nordeste,BA,Bahia,Feira de Santana,Centro Norte Baiano,Santa Terezinha,-10.470375,-50.513986
+2928505,Nordeste,BA,Bahia,Feira de Santana,Centro Norte Baiano,Santa Terezinha,-11.449092,-40.758639
 2928604,Nordeste,BA,Bahia,Santo Antônio de Jesus,Metropolitana de Salvador,Santo Amaro,-12.5519686,-38.7060448
 2928703,Nordeste,BA,Bahia,Santo Antônio de Jesus,Metropolitana de Salvador,Santo Antônio de Jesus,-12.9689361,-39.260914
 2928802,Nordeste,BA,Bahia,Feira de Santana,Centro Norte Baiano,Santo Estêvão,-12.4340621,-39.2556115
