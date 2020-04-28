@@ -43,7 +43,7 @@ df_brazil.rename(
         "id": "ID_IBGE",
         "nome": "City",
         "microrregiaonome": "Microregion",
-        "microrregiaomesorregiaonome": "Mesorregion",
+        "microrregiaomesorregiaonome": "Mesoregion",
         "microrregiaomesorregiaoUFsigla": "UF",
         "microrregiaomesorregiaoUFnome": "State",
         "microrregiaomesorregiaoUFregiaonome": "Region",
@@ -52,7 +52,12 @@ df_brazil.rename(
 )
 
 df_brazil["find_latlon"] = (
-    df_brazil["City"].map(str) + ", " + df_brazil["UF"].map(str) + ", Brazil"
+    df_brazil["City"].map(str)
+    + ", "
+    + df_brazil["UF"].map(str)
+    + ", "
+    + df_brazil["State"].map(str)
+    + ", Brazil"
 )
 # df_brazil['proc_latlon'] = df_brazil['proc_latlon'].apply(geolocator)
 df_brazil["find_latlon"] = df_brazil["find_latlon"].progress_apply(geolocator)
