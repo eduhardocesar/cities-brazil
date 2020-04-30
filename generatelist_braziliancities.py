@@ -18,23 +18,26 @@ states = json_normalize(data=r_ibge_states.json(), sep="")
 base_url_pop = "https://agenciadenoticias.ibge.gov.br/media/com_mediaibge/arquivos/"
 arq_pop = base_url_pop + "de3c3890d5e127db41740496aa4ec20f.xls"
 
-df_populacao = pd.read_excel(arq_pop, sheet_name="Municípios")
-df_populacao.columns = df_populacao.loc[0]
-df_populacao = df_populacao.drop(df_populacao.index[0])
-df_populacao = df_populacao[df_populacao["COD. UF"].notnull()]
-df_populacao.rename(
-    columns={"NOME DO MUNICÍPIO": "Cidade", "POPULAÇÃO ESTIMADA": "População"},
+df_population = pd.read_excel(arq_pop, sheet_name="Municípios")
+df_population.columns = df_population.loc[0]
+df_population = df_population.drop(df_population.index[0])
+df_population = df_population[df_population["COD. UF"].notnull()]
+df_population.rename(
+    columns={"NOME DO MUNICÍPIO": "City", "POPULAÇÃO ESTIMADA": "Population"},
     inplace=True,
 )
-df_populacao["ID_IBGE"] = (
-    df_populacao["COD. UF"].map(str).str[:2]
-    + df_populacao["COD. MUNIC"].map(str).str[:5]
+df_population["ID_IBGE"] = (
+    df_population["COD. UF"].map(str).str[:2]
+    + df_population["COD. MUNIC"].map(str).str[:5]
 )
-df_populacao["População"] = (
-    df_populacao["População"].str.split(" ").str[0].fillna(df_populacao["População"])
+df_population["Population"] = (
+    df_population["Population"]
+    .str.split(" ")
+    .str[0]
+    .fillna(df_population["Population"])
 )
-df_populacao = df_populacao[["ID_IBGE", "População"]].reset_index(drop=True)
-df_populacao = df_populacao.astype({"ID_IBGE": int, "População": int})
+df_population = df_population[["ID_IBGE", "Population"]].reset_index(drop=True)
+df_population = df_population.astype({"ID_IBGE": int, "Population": int})
 
 df_brazil = pd.DataFrame()
 
@@ -81,9 +84,9 @@ df_brazil["find_latlon"] = (
     + ", Brazil"
 )
 
-df_brazil = pd.merge(df_brazil, df_populacao, on=["ID_IBGE"], how="left")
+df_brazil = pd.merge(df_brazil, df_population, on=["ID_IBGE"], how="left")
 
-df_brazil["proc_latlon"] = df_brazil["proc_latlon"].apply(geolocator)
+# df_brazil["proc_latlon"] = df_brazil["proc_latlon"].apply(geolocator)
 df_brazil["find_latlon"] = df_brazil["find_latlon"].progress_apply(geolocator)
 df_brazil["Latitude"] = df_brazil["find_latlon"].apply(
     lambda x: x.latitude if x != None else None
