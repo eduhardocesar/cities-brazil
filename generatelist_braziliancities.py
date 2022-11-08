@@ -20,14 +20,16 @@ df_population = pd.read_excel(arq_pop, sheet_name="Municípios")
 df_population.columns = df_population.loc[0]
 df_population = df_population.drop(df_population.index[0])
 df_population = df_population[df_population["COD. UF"].notnull()]
-df_population.rename(columns={"NOME DO MUNICÍPIO": "City",
-                     "POPULAÇÃO ESTIMADA": "Population"}, inplace=True,)
-df_population["ID_IBGE"] = (df_population["COD. UF"].map(
-    str).str[:2] + df_population["COD. MUNIC"].map(str).str[:5]).astype(str).astype(int)
+df_population.rename(columns={"NOME DO MUNICÍPIO": "City", "POPULAÇÃO ESTIMADA": "Population",
+                     "COD. UF": "ID_UF", "COD. MUNIC": "ID_CITY"}, inplace=True,)
+df_population["ID_IBGE"] = (df_population["ID_UF"].map(
+    str).str[:2] + df_population["ID_CITY"].map(str).str[:5]).astype(str).astype(int)
 df_population['Population'] = np.where(df_population['Population'].str.find("(") > 0, df_population['Population'].str.split(
     r"(", expand=True)[0].str.replace(".", "", regex=True), df_population['Population'])
-df_population = df_population[["ID_IBGE", "Population"]].reset_index(drop=True)
-df_population = df_population.astype({"ID_IBGE": int, "Population": int})
+df_population = df_population[["ID_IBGE", "ID_UF",
+                               "ID_CITY", "Population"]].reset_index(drop=True)
+df_population = df_population.astype(
+    {"ID_IBGE": str, "ID_UF": str, "ID_CITY": str, "Population": int})
 
 
 async def get_async(url):
@@ -60,14 +62,19 @@ async def launch2(urls):
     for html in data_json:
 
         states = json_normalize(data=html, sep="")
-        df_cities = df_cities.append(states, ignore_index=True)
+        df_cities = pd.concat([df_cities, states])
 
     df_cities = df_cities[["id", "microrregiaomesorregiaoUFregiaonome", "microrregiaomesorregiaoUFsigla",
-                           "microrregiaomesorregiaoUFnome", "microrregiaonome", "microrregiaomesorregiaonome", "nome"]]
+                           "microrregiaomesorregiaoUFnome", "microrregiaonome", "microrregiaomesorregiaonome",
+                           "regiao-imediatanome", "regiao-imediataregiao-intermediarianome", "nome"]]
     df_cities.rename(columns={"id": "ID_IBGE", "nome": "City", "microrregiaonome": "Microregion", "microrregiaomesorregiaonome": "Mesoregion",
-                     "microrregiaomesorregiaoUFsigla": "UF", "microrregiaomesorregiaoUFnome": "State", "microrregiaomesorregiaoUFregiaonome": "Region"}, inplace=True)
+                     "microrregiaomesorregiaoUFsigla": "UF", "microrregiaomesorregiaoUFnome": "State", "microrregiaomesorregiaoUFregiaonome": "Region",
+                              "regiao-imediatanome": "ImmediateRegion", "regiao-imediataregiao-intermediarianome": "IntermediateRegion"}, inplace=True)
     df_cities['Location'] = df_cities['City'] + ", " + \
         df_cities['UF'] + ", " + df_cities['State'] + ", Brazil"
+
+    df_cities = df_cities.astype({"ID_IBGE": str})
+
     return df_cities
 
 estados = asyncio.run(obter_estados())
@@ -80,7 +87,7 @@ location = []
 geopy_latitude = []
 geopy_longitude = []
 
-list_location = df_cities['Location'].head(5).to_list()
+list_location = df_cities['Location'].to_list()
 
 for loc in tqdm(list_location):
 
@@ -99,7 +106,9 @@ df_cities_population = pd.merge(
 df_brazil = pd.merge(df_cities_population, df_location,
                      on=["Location"], how="left")
 
-df_brazil = df_brazil[["ID_IBGE", "Region", "UF", "State", "Microregion",
-                       "Mesoregion", "City", "Latitude", "Longitude", "Population"]]
-df_brazil = df_brazil.set_index("ID_IBGE")
+df_brazil = df_brazil[["ID_IBGE", "ID_UF", "ID_CITY", "Region", "UF", "State",
+                       "Microregion", "Mesoregion", "ImmediateRegion", "IntermediateRegion",
+                       "City", "Location", "Latitude", "Longitude", "Population"]]
+
 df_brazil.to_csv("list_braziliancities.csv")
+print("The file was generated!")
